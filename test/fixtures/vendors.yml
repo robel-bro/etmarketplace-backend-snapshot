@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  business_name: MyString
+  business_license: MyString
+  tin: MyString
+  id_document: MyString
+  status: 1
+  approved_at: 2026-03-15 03:48:44
+  rejected_at: 2026-03-15 03:48:44
+  rejection_reason: MyText
+  commission_rate: 9.99
+  premium: false
+  premium_expires_at: 2026-03-15 03:48:44
+
+two:
+  user: two
+  business_name: MyString
+  business_license: MyString
+  tin: MyString
+  id_document: MyString
+  status: 1
+  approved_at: 2026-03-15 03:48:44
+  rejected_at: 2026-03-15 03:48:44
+  rejection_reason: MyText
+  commission_rate: 9.99
+  premium: false
+  premium_expires_at: 2026-03-15 03:48:44

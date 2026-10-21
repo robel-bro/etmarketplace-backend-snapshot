@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  region: one
+  zone: one
+  woreda: one
+  standard_rate: 9.99
+  express_rate: 9.99
+  standard_days: 1
+  express_days: 1
+
+two:
+  region: two
+  zone: two
+  woreda: two
+  standard_rate: 9.99
+  express_rate: 9.99
+  standard_days: 1
+  express_days: 1

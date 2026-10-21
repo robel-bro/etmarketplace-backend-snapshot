@@ -1,0 +1,1 @@
+ENV['GOOGLE_APPLICATION_CREDENTIALS'] ||= Rails.root.join('config', 'firebase-service-account.json').to_s

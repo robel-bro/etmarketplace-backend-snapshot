@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  region: one
+  zone: one
+  woreda: one
+  address_line: MyString
+  landmark: MyString
+  is_default: false
+
+two:
+  user: two
+  region: two
+  zone: two
+  woreda: two
+  address_line: MyString
+  landmark: MyString
+  is_default: false

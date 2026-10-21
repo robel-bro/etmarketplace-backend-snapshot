@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vendor: one
+  amount: 9.99
+  status: 1
+  period_start: 2026-03-15
+  period_end: 2026-03-15
+
+two:
+  vendor: two
+  amount: 9.99
+  status: 1
+  period_start: 2026-03-15
+  period_end: 2026-03-15

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a1a; margin: 0; padding: 40px; }
+    .container { max-width: 800px; margin: auto; border: 1px solid #ddd; padding: 40px; border-radius: 8px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    .logo { font-size: 24px; font-weight: 700; color: #FF4400; }
+    .invoice-title { font-size: 28px; font-weight: 300; color: #555; }
+    .section { margin-bottom: 25px; }
+    .section h3 { border-bottom: 2px solid #FF4400; padding-bottom: 5px; margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 8px 5px; border-bottom: 1px solid #eee; }
+    th { color: #777; font-size: 13px; }
+    .total { text-align: right; font-size: 18px; font-weight: 700; margin-top: 20px; }
+    .footer { margin-top: 40px; font-size: 12px; color: #999; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>

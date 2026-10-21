@@ -1,0 +1,58 @@
+<%= form_with(model: [:admin, promotional_section], local: true, class: "space-y-4") do |f| %>
+  <% if promotional_section.errors.any? %>
+    <div class="bg-red-100 p-4 rounded">
+      <h2><%= pluralize(promotional_section.errors.count, "error") %> prohibited this promotional section from being saved:</h2>
+      <ul>
+        <% promotional_section.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, class: "block font-medium" %>
+    <%= f.text_field :name, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= f.label :slug, class: "block font-medium" %>
+    <%= f.text_field :slug, class: "w-full border rounded p-2" %>
+    <p class="text-sm text-gray-500">Used for "View All" link (optional).</p>
+  </div>
+
+  <div>
+    <%= f.label :section_type, class: "block font-medium" %>
+    <%= f.select :section_type, [
+      ['Flash Sale', 'flash_sale'],
+      ['Super Deal', 'super_deal'],
+      ['Trending', 'trending'],
+      ['Best Sellers', 'best_sellers'],
+      ['New Arrivals', 'new_arrivals'],
+      ['Hot Deals', 'hot_deals'],
+      ['Custom (manual)', 'custom']
+    ], include_blank: false, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= f.label :display_order, class: "block font-medium" %>
+    <%= f.number_field :display_order, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= f.label :is_active, class: "inline-flex items-center" do %>
+      <%= f.check_box :is_active, class: "mr-2" %>
+      Active
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :product_ids, "Products (for custom sections)", class: "block font-medium" %>
+    <%= f.select :product_ids, Product.all.map { |p| [p.title, p.id] }, {}, multiple: true, class: "w-full border rounded p-2" %>
+    <p class="text-sm text-gray-500">For automated sections, products are populated automatically.</p>
+  </div>
+
+  <div>
+    <%= f.submit "Save", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+  </div>
+<% end %>

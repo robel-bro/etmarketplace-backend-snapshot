@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  port: 5432
+  username: robel
+  password: merjbs2020ec
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: et_marketplace_development
+
+test:
+  <<: *default
+  database: et_marketplace_test
+
+production:
+  <<: *default
+  database: et_marketplace_production
+  username: et_marketplace
+  password: <%= ENV["ET_MARKETPLACE_DATABASE_PASSWORD"] %>

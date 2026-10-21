@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delivery Manifest #<%= params[:id] %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 20px; background: #f9fafb; }
+    .header { border-bottom: 2px solid #F97519; padding-bottom: 10px; margin-bottom: 20px; }
+    h1 { color: #111827; }
+    .pickup { background: white; border: 1px solid #e5e7eb; margin-bottom: 12px; padding: 15px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .pickup h3 { margin: 0 0 5px 0; color: #F97519; }
+    .meta { font-size: 14px; color: #6b7280; margin-bottom: 8px; }
+    .items { margin-top: 8px; }
+    .item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+    .item img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    .ready { background: #d1fae5; color: #065f46; }
+    .not-ready { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📦 Delivery Manifest #<%= params[:id] %></h1>
+    <p style="color:#6b7280;">Generated on <%= Time.current.strftime('%B %d, %Y at %I:%M %p') %></p>
+  </div>
+
+  <% @manifest.each do |pickup| %>
+    <div class="pickup">
+      <h3><%= pickup[:vendor_name] %></h3>
+      <div class="meta">
+        <strong>Address:</strong> <%= pickup[:pickup_address] %><br>
+        <strong>Phone:</strong> <%= pickup[:pickup_phone] %><br>
+        <strong>Status:</strong> 
+        <span class="badge <%= pickup[:ready] ? 'ready' : 'not-ready' %>">
+          <%= pickup[:ready] ? 'Ready ✅' : 'Not ready ⚠️' %>
+        </span>
+      </div>
+      <div class="items">
+        <% pickup[:items].each do |item| %>
+          <div class="item">
+            <% if item[:image_url].present? %>
+              <img src="<%= item[:image_url] %>" alt="<%= item[:title] %>">
+            <% else %>
+              <div style="width:50px;height:50px;background:#e5e7eb;border-radius:4px;"></div>
+            <% end %>
+            <div>
+              <strong><%= item[:quantity] %>x</strong> <%= item[:title] %>
+              <% if item[:weight_kg] %>
+                <br><small>Weight: <%= item[:weight_kg] %> kg</small>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</body>
+</html>

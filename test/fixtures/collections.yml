@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  slug: MyString
+  description: MyText
+  auto_criteria: 
+  is_active: false
+  start_date: 2026-03-25 08:09:24
+  end_date: 2026-03-25 08:09:24
+  display_order: 1
+
+two:
+  name: MyString
+  slug: MyString
+  description: MyText
+  auto_criteria: 
+  is_active: false
+  start_date: 2026-03-25 08:09:24
+  end_date: 2026-03-25 08:09:24
+  display_order: 1

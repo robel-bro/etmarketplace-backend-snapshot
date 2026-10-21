@@ -1,0 +1,166 @@
+# db/seeds.rb
+
+# ========== Categories ==========
+electronics = Category.find_or_create_by!(name: "Electronics") do |c|
+  c.description = "Gadgets and devices"
+end
+
+fashion = Category.find_or_create_by!(name: "Fashion") do |c|
+  c.description = "Clothing, shoes, accessories"
+end
+
+home = Category.find_or_create_by!(name: "Home & Living") do |c|
+  c.description = "Furniture, decor, kitchen"
+end
+
+# Subcategories under Electronics
+phones = Category.find_or_create_by!(name: "Mobile Phones") do |c|
+  c.description = "Smartphones and accessories"
+end
+phones.update!(parent: electronics) unless phones.parent == electronics
+
+laptops = Category.find_or_create_by!(name: "Laptops") do |c|
+  c.description = "Notebooks and computers"
+end
+laptops.update!(parent: electronics) unless laptops.parent == electronics
+
+tv = Category.find_or_create_by!(name: "TV & Audio") do |c|
+  c.description = "Televisions, speakers, home theater"
+end
+tv.update!(parent: electronics) unless tv.parent == electronics
+
+# Subcategories under Fashion
+men = Category.find_or_create_by!(name: "Men's Fashion")
+men.update!(parent: fashion) unless men.parent == fashion
+
+women = Category.find_or_create_by!(name: "Women's Fashion")
+women.update!(parent: fashion) unless women.parent == fashion
+
+kids = Category.find_or_create_by!(name: "Kids' Fashion")
+kids.update!(parent: fashion) unless kids.parent == fashion
+
+# Sub-subcategories under Men's Fashion
+shirts = Category.find_or_create_by!(name: "Shirts")
+shirts.update!(parent: men) unless shirts.parent == men
+
+trousers = Category.find_or_create_by!(name: "Trousers")
+trousers.update!(parent: men) unless trousers.parent == men
+
+shoes = Category.find_or_create_by!(name: "Shoes")
+shoes.update!(parent: men) unless shoes.parent == men
+
+puts "Categories seeded!"
+
+# ========== Ethiopian Address Data ==========
+# Regions
+addis = Region.find_or_create_by!(name: "Addis Ababa")
+oromia = Region.find_or_create_by!(name: "Oromia")
+amhara = Region.find_or_create_by!(name: "Amhara")
+tigray = Region.find_or_create_by!(name: "Tigray")
+snnpr = Region.find_or_create_by!(name: "SNNPR")
+sidama = Region.find_or_create_by!(name: "Sidama")
+afar = Region.find_or_create_by!(name: "Afar")
+somali = Region.find_or_create_by!(name: "Somali")
+benshangul = Region.find_or_create_by!(name: "Benshangul-Gumuz")
+gambella = Region.find_or_create_by!(name: "Gambella")
+harari = Region.find_or_create_by!(name: "Harari")
+diredawa = Region.find_or_create_by!(name: "Dire Dawa")
+
+# Addis Ababa subcities (zones)
+yeka = Zone.find_or_create_by!(name: "Yeka", region: addis)
+bole = Zone.find_or_create_by!(name: "Bole", region: addis)
+arada = Zone.find_or_create_by!(name: "Arada", region: addis)
+lideta = Zone.find_or_create_by!(name: "Lideta", region: addis)
+kirkos = Zone.find_or_create_by!(name: "Kirkos", region: addis)
+nefas_silk = Zone.find_or_create_by!(name: "Nefas Silk", region: addis)
+kolfe = Zone.find_or_create_by!(name: "Kolfe Keraniyo", region: addis)
+gulele = Zone.find_or_create_by!(name: "Gulele", region: addis)
+akaki = Zone.find_or_create_by!(name: "Akaki Kaliti", region: addis)
+addis_ketema = Zone.find_or_create_by!(name: "Addis Ketema", region: addis)
+
+# Some woredas in Bole
+(1..14).each do |i|
+  Woreda.find_or_create_by!(name: "Woreda #{i.to_s.rjust(2, '0')}", zone: bole)
+end
+
+# Oromia zones
+east_shewa = Zone.find_or_create_by!(name: "East Shewa", region: oromia)
+west_shewa = Zone.find_or_create_by!(name: "West Shewa", region: oromia)
+east_hararghe = Zone.find_or_create_by!(name: "East Hararghe", region: oromia)
+
+# Cities as woredas
+adama = Woreda.find_or_create_by!(name: "Adama", zone: east_shewa)
+bishoftu = Woreda.find_or_create_by!(name: "Bishoftu", zone: east_shewa)
+
+# Amhara
+west_gojjam = Zone.find_or_create_by!(name: "West Gojjam", region: amhara)
+bahir_dar = Woreda.find_or_create_by!(name: "Bahir Dar", zone: west_gojjam)
+
+puts "Regions, zones, woredas seeded!"
+
+# ========== Shipping Rates ==========
+ShippingRate.find_or_create_by!(region: addis, standard_rate: 50, express_rate: 100, standard_days: 2, express_days: 1)
+ShippingRate.find_or_create_by!(region: oromia, zone: east_shewa, woreda: adama, standard_rate: 80, express_rate: 150, standard_days: 3, express_days: 2)
+ShippingRate.find_or_create_by!(region: amhara, zone: west_gojjam, standard_rate: 90, express_rate: 170, standard_days: 4, express_days: 2)
+
+puts "Shipping rates seeded!"
+
+# ========== Vendor & Products ==========
+# Create a default user
+default_user = User.find_or_create_by!(email_address: "seller@example.com") do |u|
+  u.password = "password"
+  u.password_confirmation = "password"
+  u.role_mask = 2 # seller
+end
+
+# Create vendor without a block (safe from hidden attributes)
+vendor = Vendor.find_or_create_by!(user: default_user)
+vendor.update!(
+  business_name: "Demo Shop",
+  status: :approved,
+  tin: "123456789",
+  business_address: "Bole, Addis Ababa"
+)
+
+# Create products
+Product.find_or_create_by!(title: "Smartphone X") do |p|
+  p.description = "Latest model with 128GB storage"
+  p.price = 599.99
+  p.stock = 50
+  p.vendor = vendor
+  p.category = Category.find_by(name: "Mobile Phones")
+  p.status = :active
+end
+
+Product.find_or_create_by!(title: "Leather Bag") do |p|
+  p.description = "Genuine leather, handcrafted"
+  p.price = 129.99
+  p.stock = 30
+  p.vendor = vendor
+  p.category = Category.find_by(name: "Men's Fashion")
+  p.status = :active
+end
+
+Product.find_or_create_by!(title: "Coffee Maker") do |p|
+  p.description = "Brews perfect coffee every time"
+  p.price = 89.99
+  p.stock = 20
+  p.vendor = vendor
+  p.category = Category.find_by(name: "Kitchen")
+  p.status = :active
+end
+
+puts "Products seeded!"
+
+# ========== Announcements ==========
+Announcement.find_or_create_by!(title: "Welcome Sale") do |a|
+  a.content = "Get 20% off on your first purchase!"
+  a.active = true
+end
+
+Announcement.find_or_create_by!(title: "Free Shipping") do |a|
+  a.content = "Free shipping on orders over ETB 1000"
+  a.active = true
+end
+
+puts "Announcements seeded!"

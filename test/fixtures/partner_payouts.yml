@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  logistics_partner: one
+  delivery_request: one
+  amount: 9.99
+  status: 1
+  period_start: 2026-07-04
+  period_end: 2026-07-04
+  paid_at: 2026-07-04 05:45:35
+
+two:
+  logistics_partner: two
+  delivery_request: two
+  amount: 9.99
+  status: 1
+  period_start: 2026-07-04
+  period_end: 2026-07-04
+  paid_at: 2026-07-04 05:45:35

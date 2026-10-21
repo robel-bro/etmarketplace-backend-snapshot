@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+  <h1>Price Drop Alert</h1>
+  <p>Hi <%= @user.email_address %>,</p>
+  <p>The product <strong><%= @product.title %></strong> has dropped to <strong>ETB <%= @product.price %></strong> (your target price was ETB <%= @target_price %>).</p>
+  <p><a href="<%= ENV['FRONTEND_URL'] %>/product/<%= @product.id %>">View Product</a></p>
+  <p>Happy shopping!</p>
+  <p>ET Marketplace Team</p>
+</body>
+</html>

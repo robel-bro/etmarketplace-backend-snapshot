@@ -1,0 +1,10 @@
+﻿.env
+.env.*
+config/master.key
+config/credentials.yml.enc
+config/firebase-service-account.json
+*.dump
+*.sql
+log/
+tmp/
+node_modules/

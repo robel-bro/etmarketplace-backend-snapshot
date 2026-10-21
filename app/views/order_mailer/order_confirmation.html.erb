@@ -1,0 +1,11 @@
+<h1>Thank you for your order, <%= @user.email_address %>!</h1>
+<p>Your order #<%= @order.id %> has been placed successfully.</p>
+<h2>Order Details</h2>
+<ul>
+  <% @order.line_items.each do |item| %>
+    <li><%= item.quantity %> x <%= item.product.title %> - <%= number_to_currency(item.price) %></li>
+  <% end %>
+</ul>
+<p><strong>Total:</strong> <%= number_to_currency(@order.total) %></p>
+<p><strong>Shipping Address:</strong> <%= @order.shipping_address %></p>
+<p><strong>Payment Method:</strong> <%= @order.payment_method_enum %></p>
